@@ -2,7 +2,7 @@
 title: Pseudo-Invariant Feature Matching
 description: Applying relative radiometric normalization to a pair of Planet SkySat images with PIF matching.
 author: aazuspan
-tags: radiometric-normalization, change-detection, planet-skysat, deforestation
+tags: pseudo-invariant-feature-matching, radiometric-normalization, change-detection, planet-skysat, deforestation
 date_published: 2023-05-07
 ---
 <!--
