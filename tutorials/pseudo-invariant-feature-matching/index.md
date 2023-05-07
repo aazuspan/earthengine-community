@@ -1,6 +1,6 @@
 ---
 title: Pseudo-Invariant Feature Matching
-description: Applying relative radiometric normalization to a pair of Planet Skysat images with PIF matching.
+description: Applying relative radiometric normalization to a pair of Planet SkySat images with PIF matching.
 author: aazuspan
 tags: radiometric-normalization, change-detection, planet-skysat, deforestation
 date_published: 2023-05-07
@@ -21,7 +21,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 
-This tutorial demonstrates how pseudo-invariant feature (PIF) matching can be used to harmonize radiometric characteristics between images by applying the technique to a pair of [Planet Skysat](https://developers.google.com/earth-engine/datasets/catalog/SKYSAT_GEN-A_PUBLIC_ORTHO_MULTISPECTRAL) images acquired before and after a deforestation event in Peru.
+This tutorial demonstrates how pseudo-invariant feature (PIF) matching can be used to harmonize radiometric characteristics between images by applying the technique to a pair of [Planet SkySat](https://developers.google.com/earth-engine/datasets/catalog/SKYSAT_GEN-A_PUBLIC_ORTHO_MULTISPECTRAL) images acquired before and after a deforestation event in Peru.
 
 [Open in the Code Editor](https://code.earthengine.google.com/2519effefdc6e25ad98eb07b23a21999)
 
@@ -31,7 +31,7 @@ Relative radiometric normalization techniques like [histogram matching](https://
 
 ## Input Data
 
-The code below loads two Planet Skysat images acquired before and after a logging operation in Peru, clips them to a small area of interest, selects the relevant multispectral bands, and uses the [`register`](https://developers.google.com/earth-engine/apidocs/ee-image-register) method to correct a slight misregistration between images.
+The code below loads two Planet SkySat images acquired before and after a logging operation in Peru, clips them to a small area of interest, selects the relevant multispectral bands, and uses the [`register`](https://developers.google.com/earth-engine/apidocs/ee-image-register) method to correct a slight misregistration between images.
 
 ```javascript
 var aoi = ee.Geometry.Point([-75.0608, -8.2736]).buffer(3000).bounds();
