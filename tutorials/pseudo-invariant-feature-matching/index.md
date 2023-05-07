@@ -155,19 +155,19 @@ The full code is below, or you can [open it in the Code Editor](https://code.ear
 ```javascript
 // Select an area of interest and define multispectral bands to use
 var aoi = ee.Geometry.Point([-75.0608, -8.2736]).buffer(3000).bounds();
-var bands = ee.List(["N", "R", "G", "B"]);
+var bands = ee.List(['N', 'R', 'G', 'B']);
 
 // Select a pair of Planet SkySat images acquired before and after deforestation
-var before = ee.Image("SKYSAT/GEN-A/PUBLIC/ORTHO/MULTISPECTRAL/s02_20150804T151429Z")
+var before = ee.Image('SKYSAT/GEN-A/PUBLIC/ORTHO/MULTISPECTRAL/s02_20150804T151429Z')
   .select(bands)
   .clip(aoi);
-var after = ee.Image("SKYSAT/GEN-A/PUBLIC/ORTHO/MULTISPECTRAL/s01_20150910T154218Z")
+var after = ee.Image('SKYSAT/GEN-A/PUBLIC/ORTHO/MULTISPECTRAL/s01_20150910T154218Z')
   .select(bands)
   .clip(aoi)
   .register(before, 100);
 
 // Calculate spectral distance as a measure of change between the images
-var distance = before.spectralDistance(after, "sid");
+var distance = before.spectralDistance(after, 'sid');
 
 // Identify the 10th percentile of change
 var threshold = distance.reduceRegion({
@@ -176,7 +176,7 @@ var threshold = distance.reduceRegion({
   scale: 1,
   bestEffort: true,
   maxPixels: 1e6,
-}).getNumber("distance");
+}).getNumber('distance');
 
 // Define pseudo-invariant features below the change threshold
 var pif = distance.lt(threshold);
@@ -188,22 +188,22 @@ function matchBand(band) {
 
   // Define a linear reducer to calculate a transformation between images
   var args = {
-    reducer: ee.Reducer.linearFit(), 
-    geometry: aoi, 
-    scale: 1, 
-    maxPixels: 1e6, 
+    reducer: ee.Reducer.linearFit(),
+    geometry: aoi,
+    scale: 1,
+    maxPixels: 1e6,
     bestEffort: true
     };
 
   // Calculate the linear coefficients
   var coeffs = ee.Image.cat([afterPif, beforePif])
     .reduceRegion(args);
-  
+
   // Apply the coefficients to match the after band to the before band
   return after
     .select([band])
-    .multiply(coeffs.getNumber("scale"))
-    .add(coeffs.getNumber("offset"));
+    .multiply(coeffs.getNumber('scale'))
+    .add(coeffs.getNumber('offset'));
 }
 
 // Match each band, then combine them back into a single multi-band image
@@ -211,11 +211,11 @@ var matchedBands = bands.map(matchBand);
 var matched = ee.ImageCollection(matchedBands).toBands().rename(bands);
 
 Map.centerObject(aoi);
-Map.addLayer(distance, {min: 0, max: 0.4}, "Spectral distance");
-Map.addLayer(pif, {}, "PIF mask");
-Map.addLayer(before, {min: 1000, max: 5000}, "Before");
-Map.addLayer(matched, {min: 1000, max: 5000}, "After (Matched)");
-Map.addLayer(after, {min: 1000, max: 5000}, "After (Original)");
+Map.addLayer(distance, {min: 0, max: 0.4}, 'Spectral distance');
+Map.addLayer(pif, {}, 'PIF mask');
+Map.addLayer(before, {min: 1000, max: 5000}, 'Before');
+Map.addLayer(matched, {min: 1000, max: 5000}, 'After (Matched)');
+Map.addLayer(after, {min: 1000, max: 5000}, 'After (Original)');
 ```
 
 ## References
