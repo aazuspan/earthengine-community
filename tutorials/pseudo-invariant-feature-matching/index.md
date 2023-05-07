@@ -64,7 +64,7 @@ While PIFs *can* be selected manually by identifying unchanged areas and digitiz
 
 ### Measuring Spectral Distance
 
-The code below uses the [spectralDistance](https://developers.google.com/earth-engine/apidocs/ee-image-spectraldistance) method to calculate spectral information divergence (SID) between the before and after images. You can also experiment with other distance metrics like spectral angle mapper (SAM) or squared euclidean distance (SED) to see how they affect results.
+The code below uses the [`spectralDistance`](https://developers.google.com/earth-engine/apidocs/ee-image-spectraldistance) method to calculate spectral information divergence (SID) between the before and after images. You can also experiment with other distance metrics like spectral angle mapper (SAM) or squared euclidean distance (SED) to see how they affect results.
 
 ```javascript
 var distance = before.spectralDistance(after, 'SID');
