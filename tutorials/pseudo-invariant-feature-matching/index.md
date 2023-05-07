@@ -31,7 +31,7 @@ Relative radiometric normalization techniques like [histogram matching](https://
 
 ## Input Data
 
-The code below loads two Planet Skysat images acquired before and after a logging operation in Peru, clips them to a small area of interest, and selects the relevant multispectral bands, and uses the [`register`](https://developers.google.com/earth-engine/apidocs/ee-image-register) method to correct a slight misregistration between images.
+The code below loads two Planet Skysat images acquired before and after a logging operation in Peru, clips them to a small area of interest, selects the relevant multispectral bands, and uses the [`register`](https://developers.google.com/earth-engine/apidocs/ee-image-register) method to correct a slight misregistration between images.
 
 ```javascript
 var aoi = ee.Geometry.Point([-75.0608, -8.2736]).buffer(3000).bounds();
